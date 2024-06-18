@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+  pgAdmin:
+    container_name: pg_admin
+    image: dpage/pgadmin4:latest
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=test@test.com
+      - PGADMIN_DEFAULT_PASSWORD=adm1n
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    networks:
+      - travel_planner
+    ports:
+      - "5050:80"
+    restart: unless-stopped
+
+  database:
+    container_name: db
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=adm1n
+      - PGDATA=/data/postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - travel_planner
+    restart: unless-stopped
+
+  seq:
+    container_name: seq_logging
+    image: datalust/seq:latest
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - "5341:80"
+    networks:
+      - travel_planner
+
+networks:
+  travel_planner:
+    driver: bridge
+
+volumes:
+  pgadmin-data:
+  postgres:
+  cache:
+    driver: local

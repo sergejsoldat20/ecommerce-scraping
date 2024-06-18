@@ -1,0 +1,11 @@
+{
+  "database": "localhost",
+  "port": 5432,
+  "username": "sega@test.com",
+  "password": "adm1n",
+  "database_name": "scraping",
+  "buzz_url_list": [
+    "https://www.buzzsneakers.ba/patike/za-muskarce+unisex/za-odrasle",
+    "https://www.buzzsneakers.ba/patike/za-zene+unisex/za-odrasle"
+  ]
+}
